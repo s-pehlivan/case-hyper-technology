@@ -7,14 +7,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="min-h-[100vh] flex flex-col">
-    <header class="text-center text-4xl p-3 bg-blue-500">HEADER</header>
+    <header class="text-center text-4xl p-3">HEADER</header>
     <main
       class="flex grow w-full p-12 font-semibold flex flex-col justify-center items-center"
     >
-      <div
-        id="product-card-template"
-        class="flex flex-col gap-2 hidden bg-pink-200"
-      >
+      <div id="product-card-template" class="flex flex-col gap-2 hidden">
         <div class="overflow-hidden w-full aspect-square">
           <img
             id="product-image"
@@ -63,7 +60,7 @@
         </button>
       </div>
     </main>
-    <footer class="p-6 text-2xl bg-red-400">FOOTER</footer>
+    <footer class="p-6 text-2xl">FOOTER</footer>
   </body>
   <script type="module" src="./main.js"></script>
 </html>
