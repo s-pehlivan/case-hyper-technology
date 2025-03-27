@@ -17,6 +17,7 @@ The products page provides a seamless shopping experience with the following key
 - A **category-based filtering** system allows users to refine their product search by selecting a category from the available options on the products page.
 - **Pagination** helps users navigate between pages, without showing too many products at ones.
 - Both product and category **data are dynamically retrieved from the API**, ensuring real-time updates and accurate information.
+- Dark mode and light mode options offer different color themes to cater to individual user preferences.
 
 
 ## Technologies Used
@@ -32,6 +33,8 @@ The products page provides a seamless shopping experience with the following key
 - **Cart Management** – Users can add products to their cart and view cart contents seamlessly.
 - **Pagination Support** – Products are displayed in paginated views for better performance and usability.  
 - **Category-Based Filtering** – Users can filter products based on categories for a more refined shopping experience.
+- **Dark Mode / Light Mode** – Users can toggle between dark and light modes for a personalized viewing experience.  
+
 
 ## Setup
 To run this project locally, follow these steps:
