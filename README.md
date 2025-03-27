@@ -1,6 +1,6 @@
 # Hyper Teknoloji Case Project
-> Vanilla HMTL/CSS/JS project with Vite and Tailwind
-> [Live Demo](https://case-hyper-technology.vercel.app/).
+> Vanilla HMTL/CSS/JS project with Vite and Tailwind.
+> You can find the Live Demo [here.](https://case-hyper-technology.vercel.app/).
 
 ## Table of Contents
 - [Hyper Teknoloji Case Project](#hyper-teknoloji-case-project)
