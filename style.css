@@ -91,6 +91,32 @@ body {
   color: white;
 }
 
+.toast {
+  background-color: white;
+  color: #0c0a09;
+  border-radius: 0.375rem;
+  font-size: 1.25rem;
+  font-weight: 300;
+  position: fixed;
+  top: 5;
+  right: 5;
+  width: 23px;
+  padding: 1.25rem;
+  transition-property: all;
+  transition-duration: 500;
+}
+
+.toast-open {
+  transform: translateX(0%);
+
+  z-index: 200;
+}
+
+.toast-closed {
+  transform: translateX(200%);
+  z-index: 0;
+}
+
 .active-category {
   background-color: white;
   color: var(--color-text);

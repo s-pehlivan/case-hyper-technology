@@ -1,3 +1,4 @@
+import { successToast } from "./toasts.js";
 import { formatPrice } from "./utils.js";
 
 let products = [];
@@ -168,6 +169,7 @@ function addToCart(product) {
       }
     }
 
+    successToast("Ürün başarıyla sepete eklenmiştir.");
     renderCartItems();
   } catch (err) {
     console.log("addToCartErr", err);
