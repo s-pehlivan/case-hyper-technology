@@ -379,6 +379,7 @@ function renderProducts(list) {
 }
 
 async function loadProducts() {
+  page = 1;
   try {
     const response = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}Products/List${
