@@ -18,7 +18,7 @@ The products page provides a seamless shopping experience with the following key
 - **Pagination** helps users navigate between pages, without showing too many products at ones.
 - Both product and category **data are dynamically retrieved from the API**, ensuring real-time updates and accurate information.
 - Dark mode and light mode options offer different color themes to cater to individual user preferences.
-
+- Toast allow users to know the result of their actions and improve user experience.
 
 ## Technologies Used
 - HTML, JS, TAILWIND, VITE
@@ -34,7 +34,7 @@ The products page provides a seamless shopping experience with the following key
 - **Pagination Support** – Products are displayed in paginated views for better performance and usability.  
 - **Category-Based Filtering** – Users can filter products based on categories for a more refined shopping experience.
 - **Dark Mode / Light Mode** – Users can toggle between dark and light modes for a personalized viewing experience.  
-
+- **Message Toasts** – Users receive real-time feedback on their actions, enhancing the overall user experience.  
 
 ## Setup
 To run this project locally, follow these steps:
