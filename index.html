@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>HYPER Teknoloji</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script
       src="https://kit.fontawesome.com/279409dce4.js"
@@ -23,7 +23,7 @@
         --font-roboto: "Roboto", "sans-serif";
       }
       .menu-list > li {
-        @apply transition-all duration-500 hover:text-text cursor-pointer hover:scale-[1.05];
+        @apply transition-all duration-500 hover:text-light-accent cursor-pointer hover:scale-[1.05];
       }
     </style>
   </head>
@@ -227,49 +227,59 @@
         </div>
       </div>
       <!--Products-->
-      <div>
+      <div class="w-full">
         <div class="hidden">
           <div
             id="product-card-template"
             class="col-span-1 h-full rounded-md shadow-md overflow-hidden"
           >
-            <a id="product-link" href="#" class="h-full">
-              <div class="flex flex-col gap-2 h-full">
-                <div class="overflow-hidden w-full aspect-square">
-                  <img
-                    id="product-image"
-                    class="w-full h-full object-cover hover:scale-[1.15] transition-all duration-500"
-                    src=""
-                    alt="product image"
-                  />
+            <div class="flex flex-col gap-2 h-full">
+              <div class="overflow-hidden w-full aspect-square">
+                <img
+                  id="product-image"
+                  class="w-full h-full object-cover hover:scale-[1.15] transition-all duration-500"
+                  src=""
+                  alt="product image"
+                />
+              </div>
+              <div class="flex flex-col justify-between flex-grow p-3 gap-2">
+                <h2 class="product-name text-md m-0"></h2>
+                <div
+                  id="product-price"
+                  class="flex flex-wrap gap-2 items-center flex-no-wrap text-md"
+                >
+                  <h3 id="buying-price" class="text-lg semibold-font"></h3>
+                  <h4
+                    id="market-price"
+                    class="text-text-light line-through"
+                  ></h4>
+                  <h5 id="discount" class="text-text-light"></h5>
                 </div>
-                <div class="flex flex-col justify-between flex-grow p-3 gap-2">
-                  <h2 class="product-name text-md m-0"></h2>
-                  <div
-                    id="product-price"
-                    class="flex flex-wrap gap-2 items-center flex-no-wrap text-md"
+                <div class="flex items-center gap-2">
+                  <button
+                    id="cart-button"
+                    class="w-[50%] mt-1 bg-text text-white rounded-lg py-1.5 text-center hover:bg-text/90 transition-all duration-500 cursor-pointer"
                   >
-                    <h3 id="buying-price" class="text-lg semibold-font"></h3>
-                    <h4
-                      id="market-price"
-                      class="text-text-light line-through"
-                    ></h4>
-                    <h5 id="discount" class="text-text-light"></h5>
-                  </div>
-                  <div>
-                    <button
-                      id="cart-button"
-                      class="w-full mt-1 bg-text text-white rounded-lg py-1.5 text-center hover:bg-text/90 transition-all duration-500 cursor-pointer"
-                    >
-                      Sepete Ekle
-                    </button>
-                  </div>
+                    Sepete Ekle
+                  </button>
+                  <button
+                    id="detail-button"
+                    class="w-[50%] mt-1 bg-text text-white rounded-lg py-1.5 text-center hover:bg-text/90 transition-all duration-500 cursor-pointer"
+                  >
+                    Detay
+                  </button>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
         </div>
         <!--ProductCards-->
+        <div
+          id="no-product-warning"
+          class="hidden w-full flex items-center text-3xl text-start my-5 mt-12"
+        >
+          <span class="me-auto text-light-accent">Ürün Bulunamamıştır.</span>
+        </div>
         <div
           id="products-list-container"
           class="grid grid-cols-2 md:grid-cols-4 space-y-2 xl:grid-cols-5 gap-x-8 gap-y-8"

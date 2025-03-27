@@ -23,6 +23,7 @@ const productsListEl = document.getElementById("products-list-container");
 const template = document.getElementById("product-card-template");
 const categoriesListEl = document.getElementById("categories-container");
 const categoryTemplate = document.getElementById("category-item-template");
+const noProductWarningEl = document.getElementById("no-product-warning");
 
 /* Menu (Cart/User) DOM Elements */
 const cartCounter = document.getElementById("cart-counter");
@@ -302,8 +303,12 @@ function getProductCard(product) {
     img.src = product.productData.productMainImage;
     img.alt = product.productName;
 
-    const link = card.querySelector("#product-link");
-    link.href = product.productSlug;
+    const detailButton = card.querySelector("#detail-button");
+    detailButton.addEventListener("click", function (event) {
+      if (!button.contains(event.target)) {
+        window.open(product.productSlug, "_blank"); // Open in a new tab
+      }
+    });
 
     const button = card.querySelector("button");
 
@@ -312,12 +317,6 @@ function getProductCard(product) {
       event.stopPropagation();
       event.preventDefault();
       addToCart(product);
-    });
-
-    card.addEventListener("click", function (event) {
-      if (!button.contains(event.target)) {
-        window.open(product.productSlug, "_blank"); // Open in a new tab
-      }
     });
 
     card.querySelector("h2").innerText = product.productName;
@@ -365,6 +364,14 @@ function renderProducts(list) {
     };
 
     const _products = list.slice(range.start, range.end);
+
+    if (products.length === 0) {
+      productsListEl.innerHTML = "";
+      noProductWarningEl?.classList?.remove("hidden");
+      return;
+    } else {
+      noProductWarningEl?.classList?.add("hidden");
+    }
 
     _products.map((el) => {
       const card = getProductCard(el);
