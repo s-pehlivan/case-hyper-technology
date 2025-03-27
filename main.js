@@ -1,4 +1,3 @@
-import config from "./config.js";
 import { formatPrice } from "./utils.js";
 
 let products = [];
@@ -382,13 +381,13 @@ function renderProducts(list) {
 async function loadProducts() {
   try {
     const response = await fetch(
-      `${config.API_BASE_URL}Products/List${
+      `${import.meta.env.VITE_API_BASE_URL}Products/List${
         activeCategory ? "?productCategoryID=" + activeCategory : ""
       }`,
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${config.API_TOKEN}`,
+          Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
           accept: "application/json",
         },
       }
@@ -455,13 +454,16 @@ function getCategoryItem(category) {
 async function loadCategories() {
   categoriesListEl.innerHTML = "";
   try {
-    const response = await fetch(`${config.API_BASE_URL}Categories`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${config.API_TOKEN}`,
-        accept: "application/json",
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}Categories`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+          accept: "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       //TODO: handle error
