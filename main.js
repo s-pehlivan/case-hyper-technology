@@ -2,6 +2,8 @@ import config from "./config.js";
 import { formatPrice } from "./utils.js";
 
 let products = [];
+let categories = [];
+let activeCategory = null;
 let productsLength = 0;
 let limit = 20;
 let pageCount = 0;
@@ -17,9 +19,11 @@ const increaseEl = document.getElementById("increase");
 const decreaseEl = document.getElementById("decrease");
 const pageEl = document.getElementById("page");
 
-/* Products DOM Elements */
+/* Products / Category DOM Elements */
 const productsListEl = document.getElementById("products-list-container");
 const template = document.getElementById("product-card-template");
+const categoriesListEl = document.getElementById("categories-container");
+const categoryTemplate = document.getElementById("category-item-template");
 
 /* Menu (Cart/User) DOM Elements */
 const cartCounter = document.getElementById("cart-counter");
@@ -31,8 +35,7 @@ const cartItemTemplate = document.getElementById("cart-item-template");
 const cartListEl = document.getElementById("cart-list");
 const emptyCartWarningEl = document.getElementById("empty-cart-warning");
 const sideMenuContainer = document.getElementById("side-menu-container");
-
-console.log("cartListEl", cartListEl);
+const cartTotalEl = document.getElementById("cart_total");
 
 const bodyEl = document.getElementById("body");
 
@@ -61,7 +64,6 @@ userEl.addEventListener("click", handleUserMenu);
 
 /* Menu Functions */
 function handleCartMenu(event) {
-  console.log("handleCartMenu");
   event.preventDefault();
   event.stopPropagation();
   if (cartOpen) {
@@ -91,8 +93,6 @@ function handleCartMenu(event) {
 }
 
 function handleUserMenu() {
-  console.log("handleCartMenu");
-
   if (userOpen) {
     // Close the cart side menu
     userOpen = false;
@@ -150,9 +150,7 @@ function handleOutsideClick(event) {
 
 function addToCart(product) {
   try {
-    const index = cartProducts.indexOf((el) => el.id === product.productID);
-    console.log(index);
-    console.log("index !== -1", index !== -1);
+    const index = cartProducts.findIndex((el) => el.id === product.productID);
 
     if (index !== -1 && cartProducts[index] && cartProducts[index]?.count) {
       cartProducts[index] = {
@@ -211,6 +209,14 @@ function getCartItem(product, itemIndex) {
     )} ₺`;
     card.querySelector("#cart-item-count").innerText = product.count;
 
+    const deleteButton = card.querySelector("#delete-cart-item");
+
+    deleteButton.id = `delete-cart-${product.id}`;
+    deleteButton.addEventListener("click", function () {
+      cartProducts = cartProducts.filter((el) => el.id !== product.id);
+      if (!card.classList.contains("hidden")) card.classList.add("hidden");
+    });
+
     const increaseButton = card.querySelector("#cart-item-increase");
     const decreaseButton = card.querySelector("#cart-item-decrease");
 
@@ -226,10 +232,6 @@ function getCartItem(product, itemIndex) {
     decreaseButton.id = `cart-item-decrease-${product.id}`;
 
     increaseButton.addEventListener("click", function () {
-      console.log(
-        "cartProducts[itemIndex].count",
-        cartProducts[itemIndex].count
-      );
       const _newCount = cartProducts[itemIndex].count + 1;
       card.querySelector("#cart-item-count").innerText = _newCount;
       card.querySelector("h3").innerText = `${formatPrice(
@@ -244,6 +246,11 @@ function getCartItem(product, itemIndex) {
           decreaseButton.classList.remove("disabled");
         }
       }
+      const total = cartProducts.reduce(
+        (sum, curr) => sum + curr.price * curr.count,
+        0
+      );
+      cartTotalEl.innerHTML = `Toplam: ${formatPrice(total)} ₺`;
     });
     decreaseButton.addEventListener("click", function () {
       const _newCount = cartProducts[itemIndex].count - 1;
@@ -266,10 +273,13 @@ function getCartItem(product, itemIndex) {
             decreaseButton.classList.add("disabled");
         }
       }
+      const total = cartProducts.reduce(
+        (sum, curr) => sum + curr.price * curr.count,
+        0
+      );
+      cartTotalEl.innerHTML = `Toplam: ${formatPrice(total)} ₺`;
     });
-
     card.classList.remove("hidden");
-
     return card;
   } catch (err) {
     console.log("err", err);
@@ -280,17 +290,20 @@ function getCartItem(product, itemIndex) {
 function renderCartItems() {
   if (!cartListEl) return;
   cartListEl.innerHTML = "";
-  console.log("handleCartItems");
 
   try {
-    console.log("cartProducts", cartProducts);
     cartProducts.map((el, index) => {
       const cartItem = getCartItem(el, index);
-      console.log("cartItem", cartItem);
+
       if (cartItem) {
         cartListEl.appendChild(cartItem);
       }
     });
+    const total = cartProducts.reduce(
+      (sum, curr) => sum + curr.price * curr.count,
+      0
+    );
+    cartTotalEl.innerHTML = `Toplam: ${formatPrice(total)} ₺`;
   } catch (err) {
     console.log("renderCart err", err);
   }
@@ -308,6 +321,9 @@ function getProductCard(product) {
     img.src = product.productData.productMainImage;
     img.alt = product.productName;
 
+    const link = card.querySelector("#product-link");
+    link.href = product.productSlug;
+
     const button = card.querySelector("button");
 
     button.id = `product-cart-button-${product.productID}`;
@@ -315,6 +331,12 @@ function getProductCard(product) {
       event.stopPropagation();
       event.preventDefault();
       addToCart(product);
+    });
+
+    card.addEventListener("click", function (event) {
+      if (!button.contains(event.target)) {
+        window.open(product.productSlug, "_blank"); // Open in a new tab
+      }
     });
 
     card.querySelector("h2").innerText = product.productName;
@@ -377,13 +399,18 @@ function renderProducts(list) {
 
 async function loadProducts() {
   try {
-    const response = await fetch(`${config.API_BASE_URL}products/list`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${config.API_TOKEN}`,
-        accept: "application/json",
-      },
-    });
+    const response = await fetch(
+      `${config.API_BASE_URL}Products/List${
+        activeCategory ? "?productCategoryID=" + activeCategory : ""
+      }`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${config.API_TOKEN}`,
+          accept: "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       //TODO: handle error
@@ -402,4 +429,74 @@ async function loadProducts() {
   }
 }
 
+/* Category Functions */
+
+function getCategoryItem(category) {
+  if (!category || !categoryTemplate) return null;
+
+  try {
+    const card = categoryTemplate.cloneNode(true);
+    card.id = category.productCategoryID;
+
+    card.innerText = category.categoryName;
+    card.addEventListener("click", function () {
+      if (activeCategory && activeCategory === category.productCategoryID) {
+        activeCategory = null;
+        card.classList.remove("active-category");
+      } else {
+        activeCategory = category.productCategoryID;
+        const actives = document.getElementsByClassName("active-category");
+
+        const toBeDeactivated = Array.prototype.filter.call(
+          actives,
+          (testElement) => testElement.id !== `${category.productCategoryID}`
+        );
+
+        toBeDeactivated.map((el) => {
+          if (el.id !== `${category.productCategoryID}`) {
+            el.classList.remove("active-category");
+          }
+        });
+        if (!card.classList.contains("active-category"))
+          card.classList.add("active-category");
+      }
+      loadProducts();
+    });
+    card.classList.remove("hidden");
+    return card;
+  } catch (err) {
+    console.log("err", err);
+    return null;
+  }
+}
+
+async function loadCategories() {
+  categoriesListEl.innerHTML = "";
+  try {
+    const response = await fetch(`${config.API_BASE_URL}Categories`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${config.API_TOKEN}`,
+        accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      //TODO: handle error
+    }
+    const json = await response.json();
+    categories = json?.data ?? [];
+    // render categories
+    categories.map((el) => {
+      const category = getCategoryItem(el);
+      categoriesListEl.appendChild(category);
+    });
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
 loadProducts();
+
+loadCategories();
