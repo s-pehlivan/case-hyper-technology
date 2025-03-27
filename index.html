@@ -5,62 +5,316 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
-  <body class="min-h-[100vh] flex flex-col">
-    <header class="text-center text-4xl p-3">HEADER</header>
-    <main
-      class="flex grow w-full p-12 font-semibold flex flex-col justify-center items-center"
-    >
-      <div id="product-card-template" class="flex flex-col gap-2 hidden">
-        <div class="overflow-hidden w-full aspect-square">
-          <img
-            id="product-image"
-            class="w-full h-full object-cover hover:scale-[1.25] transition-all duration-500"
-            src=""
-            alt="product image"
-          />
-        </div>
+    <script
+      src="https://kit.fontawesome.com/279409dce4.js"
+      crossorigin="anonymous"
+    ></script>
 
-        <h2 class="product-name text-sm"></h2>
+    <link rel="stylesheet" href="style.css" />
+    <style type="text/tailwindcss">
+      @theme {
+        --color-background: #fdf8f6;
+        --color-border: #f6e8e4;
+        --color-text: #1f2937;
+        --color-text-light: #6b7280;
+        --color-accent: #7f1d1d;
+        --font-roboto: "Roboto", "sans-serif";
+      }
+      .menu-list > li {
+        @apply transition-all duration-500 hover:text-text cursor-pointer hover:scale-[1.05];
+      }
+    </style>
+  </head>
+  <body
+    id="body"
+    class="min-h-[100vh] flex flex-col text-text base-font overflow-x-hidden"
+  >
+    <header
+      class="px-6 md:px-12 py-5 flex justify-between items-center text-3xl p-5 bg-background border border-border roboto"
+    >
+      <span id="logo">HyperTeknoloji</span>
+      <div class="text-[1.6rem] light-font space-x-2">
+        <span id="user"><i class="fa-solid fa-user cursor-pointer"></i></span>
+        <span id="cart" class="relative cursor-pointer">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span
+            id="cart-counter"
+            class="absolute -right-2 -top-2 text-[12px] w-5 h-5 flex text-center items-center justify-center rounded-full bg-accent text-white pt-0.5"
+            >0</span
+          >
+        </span>
+      </div>
+    </header>
+    <main
+      class="p-6 md:p-12 pt-0 md:pt-0 flex flex-grow w-full flex-col justify-center items-center roboto"
+    >
+      <h1 class="text-4xl my-5 text-start w-full">Ürünler</h1>
+      <!--Side Menu (User/Cart)-->
+      <div class="z-[100]">
         <div
-          id="product-price"
-          class="flex flex-wrap mt-auto gap-2 items-center flex-no-wrap text-sm"
+          id="side-menu-container"
+          class="fixed bg-black/40 inset-0 w-full h-full close transition-opacity duration-500"
+        ></div>
+        <div
+          id="user-menu"
+          class="fixed right-0 top-0 bottom-0 h-full bg-white shadow-md w-[300px] md:w-[350px] transition-all duration-500 close"
         >
-          <h3 id="buying-price" class="font-semibold text-md"></h3>
-          <h4
-            id="market-price"
-            class="text-gray-500 line-through font-light"
-          ></h4>
-          <h5 id="discount" class="text-gray-500 font-semibold"></h5>
+          <h3 class="text-2xl light-font p-5 border-b border-border">
+            Kullanıcı Menüsü
+          </h3>
+
+          <ul class="flex flex-col text-sm divide-y divide-border">
+            <li
+              class="p-5 cursor-pointer hover:bg-background transition-colors duration-500"
+            >
+              Kullanıcı Profili
+            </li>
+            <li
+              class="p-5 cursor-pointer hover:bg-background transition-colors duration-500"
+            >
+              Siparişler
+            </li>
+            <li
+              class="p-5 cursor-pointer hover:bg-background transition-colors duration-500"
+            >
+              Beğeniler
+            </li>
+            <li
+              class="p-5 cursor-pointer hover:bg-background transition-colors duration-500"
+            >
+              Değerlendirmeler
+            </li>
+            <li
+              class="p-5 cursor-pointer hover:bg-background transition-colors duration-500"
+            >
+              Ödeme Ayarları
+            </li>
+            <li
+              class="p-5 cursor-pointer hover:bg-background transition-colors duration-500 border-b border-border"
+            >
+              Hesap Ayarları
+            </li>
+          </ul>
+        </div>
+        <div
+          id="cart-menu"
+          class="fixed right-0 top-0 bottom-0 h-full bg-white shadow-md w-[300px] md:w-[350px] transition-all duration-500 close shadow-md"
+        >
+          <h3 class="text-2xl light-font p-5 border-b border-border">Sepet</h3>
+          <p id="empty-cart-warning" class="text-text-light p-5 border-0">
+            Sepetinizde Ürün Bulunmamaktadır.
+          </p>
+          <div
+            id="cart-list"
+            class="flex flex-col divide-y divide-border border-b border-border hidden"
+          >
+            <li
+              id="cart-item-template"
+              class="hidden flex items-center gap-3 w-full"
+            >
+              <img
+                id="cart-item-img"
+                src=""
+                alt="cart-item"
+                class="w-[100px] aspect-square object-cover"
+              />
+              <div
+                class="text-sm text-text-light me-5 flex-grow overflow-hidden flex flex-col justify-center"
+              >
+                <h2 id="cart-item-name" class="truncate"></h2>
+
+                <h3 id="cart-item-price" class="semibold-font text-lg"></h3>
+                <div class="flex gap-2 w-full">
+                  <div
+                    id="cart-item-counter"
+                    class="grid flex-grow grid-cols-3 items-center text-lg divide-x divide-border border border-border rounded-md text-center"
+                  >
+                    <button id="cart-item-decrease">-</button>
+                    <span id="cart-item-count">1</span>
+                    <button id="cart-item-increase">+</button>
+                  </div>
+                  <button
+                    id="delete-cart-item"
+                    class="border border-accent bg-accent text-white rounded-md w-[30px]"
+                  >
+                    x
+                  </button>
+                </div>
+              </div>
+            </li>
+          </div>
         </div>
       </div>
-      <!--ProductCards-->
-      <div
-        id="products-list-container"
-        class="grid grid-cols-2 md:grid-cols-3 space-y-5 lg:grid-cols-4 w-full gap-5"
-      ></div>
-      <!--Pagination-->
-      <div id="pagination" class="flex gap-5">
-        <button
-          id="decrease"
-          class="p-2 border border-gray-300 rounded-md min-w-[50px] cursor-pointer"
-        >
-          -
-        </button>
-        <span
-          id="page"
-          class="p-2 border border-gray-200 rounded-md min-w-[50px] text-center"
-          >1</span
-        >
-        <button
-          id="increase"
-          class="p-2 border border-gray-300 rounded-md min-w-[50px] cursor-pointer"
-        >
-          +
-        </button>
+      <!--Products-->
+      <div>
+        <div class="hidden">
+          <div
+            id="product-card-template"
+            class="col-span-1 flex flex-col gap-2 h-full"
+          >
+            <div class="overflow-hidden w-full aspect-square">
+              <img
+                id="product-image"
+                class="w-full h-full object-cover hover:scale-[1.25] transition-all duration-500"
+                src=""
+                alt="product image"
+              />
+            </div>
+            <div class="flex flex-col justify-between flex-grow p-3 gap-2">
+              <h2 class="product-name text-md m-0"></h2>
+              <div
+                id="product-price"
+                class="flex flex-wrap gap-2 items-center flex-no-wrap text-md"
+              >
+                <h3 id="buying-price" class="text-lg semibold-font"></h3>
+                <h4 id="market-price" class="text-text-light line-through"></h4>
+                <h5 id="discount" class="text-text-light"></h5>
+              </div>
+              <div>
+                <button
+                  id="cart-button"
+                  class="w-full mt-1 bg-text text-white rounded-lg py-1.5 text-center hover:bg-text/90 transition-all duration-500 cursor-pointer"
+                >
+                  Sepete Ekle
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--ProductCards-->
+        <div
+          id="products-list-container"
+          class="grid grid-cols-2 md:grid-cols-4 space-y-2 xl:grid-cols-5 gap-x-8 gap-y-8"
+        ></div>
+        <!--Pagination-->
+        <div id="pagination" class="flex gap-5 mt-8">
+          <button
+            id="decrease"
+            class="p-2 border border-border rounded-md min-w-[50px] cursor-pointer"
+          >
+            -
+          </button>
+          <span
+            id="page"
+            class="p-2 border border-border rounded-md min-w-[50px] text-center"
+            >1</span
+          >
+          <button
+            id="increase"
+            class="p-2 border border-border rounded-md min-w-[50px] cursor-pointer"
+          >
+            +
+          </button>
+        </div>
       </div>
     </main>
-    <footer class="p-6 text-2xl">FOOTER</footer>
+    <footer class="text-2xl roboto bg-background text-sm text-text-light">
+      <!--Top-->
+      <div
+        class="border-t border-border flex flex-col sm:flex-row items-center justify-center divide-y divide-border sm:divide-y-[0px]"
+      >
+        <div
+          class="p-5 w-full sm:w-[50%] text-center md:text-start mb-5 sm:mb-0"
+        >
+          <h3 class="text-sm">
+            Platformumuz, oyun içi eşyalar, hesaplar ve dijital içerikler için
+            güvenli ve hızlı bir alışveriş deneyimi sunar. Güvenilir satıcılarla
+            alıcıları buluşturur, sorunsuz ticaret imkanı sağlar. Keyifli
+            alışverişler dileriz!
+          </h3>
+        </div>
+
+        <div class="p-5 pt-0 sm:pt-5 flex-grow flex flex-col items-center">
+          <h3 class="text-lg light-font">Takip Et</h3>
+          <h2 class="text-3xl text-text text-center">
+            En İyi Tekliflere Şimdi Ulaş!
+          </h2>
+          <div class="flex items-center gap-3">
+            <img
+              class="w-8 h-8 cursor-pointer hover:scale-[1.25] opacity-70 hover:opacity-90 transition-all duration-500"
+              src="./assets/icons/instagram.png"
+            />
+            <img
+              class="w-8 h-8 cursor-pointer hover:scale-[1.25] opacity-70 hover:opacity-90 transition-all duration-500"
+              src="./assets/icons/youtube.png"
+            />
+            <img
+              class="w-12 h-12 cursor-pointer hover:scale-[1.25] opacity-70 hover:opacity-90 transition-all duration-500"
+              src="./assets/icons/discord.png"
+            />
+          </div>
+        </div>
+      </div>
+      <!--Middle-->
+      <div
+        class="p-5 border-t border-border grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-8"
+      >
+        <div
+          class="flex flex-col items-center sm:items-start text-center sm:text-start"
+        >
+          <h5 class="text-lg semibold-font text-text mb-2">Çok Satanlar</h5>
+          <ul class="flex flex-col gap-3 menu-list">
+            <li>LoL RP Satın Al</li>
+            <li>PUBG UC Satın Al</li>
+            <li>Valorant VP Satın Al</li>
+            <li>MLBB Elmas Satın Al</li>
+            <li>Roblox Robux Satın Al</li>
+            <li>Brawl Stars Elmas Satın Al</li>
+          </ul>
+        </div>
+        <div
+          class="flex flex-col items-center sm:items-start text-center sm:text-start"
+        >
+          <h5 class="text-lg semibold-font text-text mb-2">Popüler İlanlar</h5>
+          <ul class="flex flex-col gap-3 menu-list">
+            <li>PUBG Random Hesap Satın Al</li>
+            <li>MLBB Hesap Satın Al</li>
+            <li>Steam Random Key Satın Al</li>
+            <li>Roblox Hesap Satın Al</li>
+            <li>Discord Nitro Satın Al</li>
+            <li>Instagram Takipçi Satın Al</li>
+          </ul>
+        </div>
+        <div
+          class="flex flex-col items-center sm:items-start text-center sm:text-start"
+        >
+          <h5 class="text-lg semibold-font text-text mb-2">Kurumsal</h5>
+          <ul class="flex flex-col gap-3 menu-list">
+            <li>Hakkımızda</li>
+            <li>Gizlilik ve Çerezler Politikası</li>
+            <li>Satış Sözleşmesi</li>
+            <li>İptal ve İade Koşulları</li>
+            <li>İletişim</li>
+          </ul>
+        </div>
+        <div
+          class="flex flex-col items-center sm:items-start text-center sm:text-start"
+        >
+          <h5 class="text-lg semibold-font text-text mb-2">Bize Ulaşın</h5>
+          <ul class="flex flex-col gap-3 menu-list">
+            <li>
+              <i class="fa-solid fa-phone inline pe-1"></i> +90 850 304 12 27
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot inline pe-1"></i> Serbest Liman
+              ve Bölge Posta Kutusu No: 1449 - KKTC / Gazimağusa
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope inline pe-1"></i>
+              bilgi@hyperteknoloji.com
+            </li>
+            <li>
+              <i class="fa-solid fa-building inline pe-2"></i>Penta Game Yazılım
+              ve Bilişim Teknolojileri LTD.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--End-->
+      <div class="border-t border-border px-5 py-4 text-center">
+        © 2025 Hyper Teknoloji
+      </div>
+    </footer>
   </body>
   <script type="module" src="./main.js"></script>
 </html>
