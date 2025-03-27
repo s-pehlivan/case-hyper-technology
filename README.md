@@ -14,8 +14,9 @@
 ## General Information
 The products page provides a seamless shopping experience with the following key functionalities:
 - Users can browse available products, add items to their cart, review cart contents, and navigate to detailed product pages by selecting individual product cards.
-- A category-based filtering system allows users to refine their product search by selecting a category from the available options on the products page.
-- Both product and category data are dynamically retrieved from the API, ensuring real-time updates and accurate information.
+- A **category-based filtering** system allows users to refine their product search by selecting a category from the available options on the products page.
+- **Pagination** helps users navigate between pages, without showing too many products at ones.
+- Both product and category **data are dynamically retrieved from the API**, ensuring real-time updates and accurate information.
 
 
 ## Technologies Used
@@ -26,10 +27,11 @@ The products page provides a seamless shopping experience with the following key
 - Categories: GET: /categories
 
 ## Features
-- Dynamic Product Listings – Products are fetched from the API and displayed in real-time. 
-- Interactive Product Cards – Clickable product cards provide quick access to detailed product pages.
--  Cart Management – Users can add products to their cart and view cart contents seamlessly.
--  Category-Based Filtering – Users can filter products based on categories for a more refined shopping experience.
+- **Dynamic Product Listings** – Products are fetched from the API and displayed in real-time. 
+- **Interactive Product Cards** – Clickable product cards provide quick access to detailed product pages.
+- **Cart Management** – Users can add products to their cart and view cart contents seamlessly.
+- **Pagination Support** – Products are displayed in paginated views for better performance and usability.  
+- **Category-Based Filtering** – Users can filter products based on categories for a more refined shopping experience.
 
 ## Setup
 To run this project locally, follow these steps:
