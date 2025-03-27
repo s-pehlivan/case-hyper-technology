@@ -379,8 +379,10 @@ function renderProducts(list) {
 }
 
 async function loadProducts() {
-  page = 1;
   try {
+    page = 1;
+    pageEl.innerText = page;
+
     const response = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}Products/List${
         activeCategory ? "?productCategoryID=" + activeCategory : ""
