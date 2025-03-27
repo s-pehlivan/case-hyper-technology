@@ -32,41 +32,48 @@
     class="min-h-[100vh] flex flex-col text-text base-font overflow-x-hidden bg-body"
   >
     <header
-      class="px-6 md:px-12 py-5 flex flex-col sm:flex-row gap-y-3 justify-between sm:items-center text-3xl p-5 bg-background border border-border overflow-hidden text-light"
+      class="bg-background border-b border-border overflow-hidden text-light flex"
     >
-      <span id="logo" class="text-2xl md:text-3xl text-accent semibold-font"
-        >HyperTeknoloji</span
-      >
       <div
-        class="flex justify-between sm:block text-[1.6rem] light-font space-x-2"
+        class="w-full max-w-[1028px] mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row gap-y-3 justify-between sm:items-center text-3xl p-5"
       >
-        <span id="user"><i class="fa-solid fa-user cursor-pointer"></i></span>
-        <span id="cart" class="relative cursor-pointer">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span
-            id="cart-counter"
-            class="absolute -right-2 -top-2 text-[12px] w-5 h-5 flex text-center items-center justify-center rounded-full bg-accent text-white pt-0.5"
-            >0</span
-          >
-        </span>
-        <button
-          id="theme-button"
-          class="cursor-pointer flex text-[1.3rem] inline border border-border rounded-full overflow-hidden"
+        <span id="logo" class="text-2xl md:text-3xl text-accent semibold-font"
+          >HyperTeknoloji</span
         >
-          <span
-            id="light-icon"
-            class="px-4 py-3 transition-colors duration-500"
-          >
-            <i class="fa-solid fa-sun"></i
-          ></span>
-          <span id="dark-icon" class="px-4 py-3 transition-colors duration-500">
-            <i class="fa-solid fa-moon"></i>
+        <div
+          class="flex justify-between sm:block text-[1.6rem] light-font space-x-2"
+        >
+          <span id="user"><i class="fa-solid fa-user cursor-pointer"></i></span>
+          <span id="cart" class="relative cursor-pointer">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span
+              id="cart-counter"
+              class="absolute -right-2 -top-2 text-[12px] w-5 h-5 flex text-center items-center justify-center rounded-full bg-accent text-white pt-0.5"
+              >0</span
+            >
           </span>
-        </button>
+          <button
+            id="theme-button"
+            class="cursor-pointer flex text-[1.3rem] inline border border-border rounded-full overflow-hidden"
+          >
+            <span
+              id="light-icon"
+              class="px-4 py-3 transition-colors duration-500"
+            >
+              <i class="fa-solid fa-sun"></i
+            ></span>
+            <span
+              id="dark-icon"
+              class="px-4 py-3 transition-colors duration-500"
+            >
+              <i class="fa-solid fa-moon"></i>
+            </span>
+          </button>
+        </div>
       </div>
     </header>
     <main
-      class="p-6 md:p-12 pt-0 md:pt-0 flex flex-grow w-full flex-col justify-center items-center roboto overflow-x-hidden"
+      class="max-w-[1028px] mx-auto p-6 md:p-12 pt-0 md:pt-0 flex flex-grow w-full flex-col justify-center items-center roboto overflow-x-hidden"
     >
       <h1 class="text-4xl mt-5 text-start w-full">Ürünler</h1>
       <h2 class="text-text-light text-md light-font text-start w-full mb-5">
@@ -284,7 +291,7 @@
         </div>
         <div
           id="products-list-container"
-          class="grid grid-cols-2 md:grid-cols-4 space-y-2 xl:grid-cols-5 gap-x-8 gap-y-8"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 space-y-2 xl:grid-cols-5 gap-x-8 gap-y-8"
         ></div>
         <!--Pagination-->
         <div class="w-full flex justify-center">
@@ -310,117 +317,127 @@
         </div>
       </div>
     </main>
-    <footer class="text-2xl roboto bg-background text-sm text-text-light">
+    <footer
+      class="text-2xl flex-flex-col roboto divide-y divide-border border-t border-border bg-background text-sm text-text-light"
+    >
       <!--Top-->
-      <div
-        class="border-t border-border flex flex-col sm:flex-row items-center justify-center divide-y divide-border sm:divide-y-[0px]"
-      >
+      <div>
         <div
-          class="p-5 w-full sm:w-[50%] text-center md:text-start mb-5 sm:mb-0"
+          class="max-w-[1028px] mx-auto flex flex-col sm:flex-row items-center justify-center divide-y divide-border sm:divide-y-[0px]"
         >
-          <h3 class="text-sm">
-            Platformumuz, oyun içi eşyalar, hesaplar ve dijital içerikler için
-            güvenli ve hızlı bir alışveriş deneyimi sunar. Güvenilir satıcılarla
-            alıcıları buluşturur, sorunsuz ticaret imkanı sağlar. Keyifli
-            alışverişler dileriz!
-          </h3>
-        </div>
+          <div
+            class="p-5 w-full sm:w-[50%] text-center md:text-start mb-5 sm:mb-0"
+          >
+            <h3 class="text-sm">
+              Platformumuz, oyun içi eşyalar, hesaplar ve dijital içerikler için
+              güvenli ve hızlı bir alışveriş deneyimi sunar. Güvenilir
+              satıcılarla alıcıları buluşturur, sorunsuz ticaret imkanı sağlar.
+              Keyifli alışverişler dileriz!
+            </h3>
+          </div>
 
-        <div class="p-5 pt-0 sm:pt-5 flex-grow flex flex-col items-center">
-          <h3 class="text-lg light-font text-light-accent">Takip Et</h3>
-          <h2 class="text-3xl text-light-accent text-center">
-            En İyi Tekliflere Şimdi Ulaş!
-          </h2>
-          <div class="flex items-center gap-3">
-            <img
-              class="social w-8 h-8 cursor-pointer hover:scale-[1.25] opacity-70 hover:opacity-90 transition-all duration-500"
-              src="./icons/instagram.png"
-            />
-            <img
-              class="social w-8 h-8 cursor-pointer hover:scale-[1.25] opacity-70 hover:opacity-90 transition-all duration-500"
-              src="./icons/youtube.png"
-            />
-            <img
-              class="social w-12 h-12 cursor-pointer hover:scale-[1.25] opacity-70 hover:opacity-90 transition-all duration-500"
-              src="./icons/discord.png"
-            />
+          <div class="p-5 pt-0 sm:pt-5 flex-grow flex flex-col items-center">
+            <h3 class="text-lg light-font text-light-accent">Takip Et</h3>
+            <h2 class="text-3xl text-light-accent text-center">
+              En İyi Tekliflere Şimdi Ulaş!
+            </h2>
+            <div class="flex items-center gap-3">
+              <img
+                class="social w-8 h-8 cursor-pointer hover:scale-[1.25] opacity-70 hover:opacity-90 transition-all duration-500"
+                src="./icons/instagram.png"
+              />
+              <img
+                class="social w-8 h-8 cursor-pointer hover:scale-[1.25] opacity-70 hover:opacity-90 transition-all duration-500"
+                src="./icons/youtube.png"
+              />
+              <img
+                class="social w-12 h-12 cursor-pointer hover:scale-[1.25] opacity-70 hover:opacity-90 transition-all duration-500"
+                src="./icons/discord.png"
+              />
+            </div>
           </div>
         </div>
       </div>
       <!--Middle-->
-      <div
-        class="p-5 border-t border-border grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-8"
-      >
+      <div>
         <div
-          class="flex flex-col items-center sm:items-start text-center sm:text-start"
+          class="p-5 max-w-[1028px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-8"
         >
-          <h5 class="text-lg semibold-font text-light-accent mb-2">
-            Çok Satanlar
-          </h5>
-          <ul class="flex flex-col gap-3 menu-list">
-            <li>LoL RP Satın Al</li>
-            <li>PUBG UC Satın Al</li>
-            <li>Valorant VP Satın Al</li>
-            <li>MLBB Elmas Satın Al</li>
-            <li>Roblox Robux Satın Al</li>
-            <li>Brawl Stars Elmas Satın Al</li>
-          </ul>
-        </div>
-        <div
-          class="flex flex-col items-center sm:items-start text-center sm:text-start"
-        >
-          <h5 class="text-lg semibold-font text-light-accent mb-2">
-            Popüler İlanlar
-          </h5>
-          <ul class="flex flex-col gap-3 menu-list">
-            <li>PUBG Random Hesap Satın Al</li>
-            <li>MLBB Hesap Satın Al</li>
-            <li>Steam Random Key Satın Al</li>
-            <li>Roblox Hesap Satın Al</li>
-            <li>Discord Nitro Satın Al</li>
-            <li>Instagram Takipçi Satın Al</li>
-          </ul>
-        </div>
-        <div
-          class="flex flex-col items-center sm:items-start text-center sm:text-start"
-        >
-          <h5 class="text-lg semibold-font text-light-accent mb-2">Kurumsal</h5>
-          <ul class="flex flex-col gap-3 menu-list">
-            <li>Hakkımızda</li>
-            <li>Gizlilik ve Çerezler Politikası</li>
-            <li>Satış Sözleşmesi</li>
-            <li>İptal ve İade Koşulları</li>
-            <li>İletişim</li>
-          </ul>
-        </div>
-        <div
-          class="flex flex-col items-center sm:items-start text-center sm:text-start"
-        >
-          <h5 class="text-lg semibold-font text-light-accent mb-2">
-            Bize Ulaşın
-          </h5>
-          <ul class="flex flex-col gap-3 menu-list">
-            <li>
-              <i class="fa-solid fa-phone inline pe-1"></i> +90 850 304 12 27
-            </li>
-            <li>
-              <i class="fa-solid fa-location-dot inline pe-1"></i> Serbest Liman
-              ve Bölge Posta Kutusu No: 1449 - KKTC / Gazimağusa
-            </li>
-            <li>
-              <i class="fa-solid fa-envelope inline pe-1"></i>
-              bilgi@hyperteknoloji.com
-            </li>
-            <li>
-              <i class="fa-solid fa-building inline pe-2"></i>Penta Game Yazılım
-              ve Bilişim Teknolojileri LTD.
-            </li>
-          </ul>
+          <div
+            class="flex flex-col items-center sm:items-start text-center sm:text-start"
+          >
+            <h5 class="text-lg semibold-font text-light-accent mb-2">
+              Çok Satanlar
+            </h5>
+            <ul class="flex flex-col gap-3 menu-list">
+              <li>LoL RP Satın Al</li>
+              <li>PUBG UC Satın Al</li>
+              <li>Valorant VP Satın Al</li>
+              <li>MLBB Elmas Satın Al</li>
+              <li>Roblox Robux Satın Al</li>
+              <li>Brawl Stars Elmas Satın Al</li>
+            </ul>
+          </div>
+          <div
+            class="flex flex-col items-center sm:items-start text-center sm:text-start"
+          >
+            <h5 class="text-lg semibold-font text-light-accent mb-2">
+              Popüler İlanlar
+            </h5>
+            <ul class="flex flex-col gap-3 menu-list">
+              <li>PUBG Random Hesap Satın Al</li>
+              <li>MLBB Hesap Satın Al</li>
+              <li>Steam Random Key Satın Al</li>
+              <li>Roblox Hesap Satın Al</li>
+              <li>Discord Nitro Satın Al</li>
+              <li>Instagram Takipçi Satın Al</li>
+            </ul>
+          </div>
+          <div
+            class="flex flex-col items-center sm:items-start text-center sm:text-start"
+          >
+            <h5 class="text-lg semibold-font text-light-accent mb-2">
+              Kurumsal
+            </h5>
+            <ul class="flex flex-col gap-3 menu-list">
+              <li>Hakkımızda</li>
+              <li>Gizlilik ve Çerezler Politikası</li>
+              <li>Satış Sözleşmesi</li>
+              <li>İptal ve İade Koşulları</li>
+              <li>İletişim</li>
+            </ul>
+          </div>
+          <div
+            class="flex flex-col items-center sm:items-start text-center sm:text-start"
+          >
+            <h5 class="text-lg semibold-font text-light-accent mb-2">
+              Bize Ulaşın
+            </h5>
+            <ul class="flex flex-col gap-3 menu-list">
+              <li>
+                <i class="fa-solid fa-phone inline pe-1"></i> +90 850 304 12 27
+              </li>
+              <li>
+                <i class="fa-solid fa-location-dot inline pe-1"></i> Serbest
+                Liman ve Bölge Posta Kutusu No: 1449 - KKTC / Gazimağusa
+              </li>
+              <li>
+                <i class="fa-solid fa-envelope inline pe-1"></i>
+                bilgi@hyperteknoloji.com
+              </li>
+              <li>
+                <i class="fa-solid fa-building inline pe-2"></i>Penta Game
+                Yazılım ve Bilişim Teknolojileri LTD.
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <!--End-->
-      <div class="border-t border-border px-5 py-4 text-center">
-        © 2025 Hyper Teknoloji
+      <div>
+        <div class="max-w-[1028px] mx-auto px-5 py-4 text-center">
+          © 2025 Hyper Teknoloji
+        </div>
       </div>
     </footer>
   </body>
