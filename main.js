@@ -34,7 +34,7 @@ const userMenuEl = document.getElementById("user-menu");
 const cartItemTemplate = document.getElementById("cart-item-template");
 const cartListEl = document.getElementById("cart-list");
 const emptyCartWarningEl = document.getElementById("empty-cart-warning");
-const sideMenuContainer = document.getElementById("side-menu-container");
+
 const cartTotalEl = document.getElementById("cart_total");
 
 const bodyEl = document.getElementById("body");
@@ -71,9 +71,6 @@ function handleCartMenu(event) {
     cartOpen = false;
     cartMenuEl.classList.remove("open");
     cartMenuEl.classList.add("close");
-
-    sideMenuContainer.classList.add("container-close");
-    sideMenuContainer.classList.remove("container-open");
   } else {
     // Open the cart side menu
     if (userOpen) {
@@ -86,9 +83,6 @@ function handleCartMenu(event) {
     cartOpen = true;
     cartMenuEl.classList.remove("close");
     cartMenuEl.classList.add("open");
-
-    sideMenuContainer.classList.remove("container-close");
-    sideMenuContainer.classList.add("container-open");
   }
 }
 
@@ -98,9 +92,6 @@ function handleUserMenu() {
     userOpen = false;
     userMenuEl.classList.remove("open");
     userMenuEl.classList.add("close");
-
-    sideMenuContainer.classList.add("container-close");
-    sideMenuContainer.classList.remove("container-open");
   } else {
     // Open the cart side menu
     if (cartOpen) {
@@ -112,9 +103,6 @@ function handleUserMenu() {
     userOpen = true;
     userMenuEl.classList.remove("close");
     userMenuEl.classList.add("open");
-
-    sideMenuContainer.classList.remove("container-close");
-    sideMenuContainer.classList.add("container-open");
   }
 }
 
@@ -129,9 +117,6 @@ function handleOutsideClick(event) {
     userMenuEl.classList.remove("open");
     userMenuEl.classList.add("close");
     userOpen = false;
-
-    sideMenuContainer.classList.add("container-close");
-    sideMenuContainer.classList.remove("container-open");
   }
   if (
     cartOpen &&
@@ -142,9 +127,6 @@ function handleOutsideClick(event) {
     cartMenuEl.classList.remove("open");
     cartMenuEl.classList.add("close");
     cartOpen = false;
-
-    sideMenuContainer.classList.add("container-close");
-    sideMenuContainer.classList.remove("container-open");
   }
 }
 

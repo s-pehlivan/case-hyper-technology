@@ -6,7 +6,6 @@ const socialElements = document.getElementsByClassName("social");
 const socialImages = Array.prototype.filter.call(
   socialElements,
   (testElement) => {
-    console.log("testElement", testElement);
     return testElement.type !== "img";
   }
 );
